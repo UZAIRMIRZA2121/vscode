@@ -60,15 +60,15 @@
                         <div class="footer-address">
                             <div class="d-flex gap-2 align-items-center">
                                 <span><ion-icon class="icon" name="pin"></span>
-                                <p class="footer-text ">House # 457-K, Street # 58, Sector I-8/3,Islamabad,Pakistan</p>
+                                <p class="footer-text ">MsOns Enterprises, MirKalam Road,Parachinar</p>
                             </div>
                             <div class="d-flex gap-2 align-items-start ">
                                 <span><ion-icon class="icon" name="mail"></span>
-                                <a href="" class=" ">contact@MsOns.pk</a>
+                                <a href="" class=" ">info@msons-shop.com</a>
                             </div>
                             <div class="d-flex gap-2 align-items-start ">
                                 <span><ion-icon class="icon" name="call"></span>
-                                <a class=" " href="tel: +923177096898">Phone: +92333333333</a>
+                                <a class=" " href="tel: +923028320991">Phone: +923028320991</a>
                             </div>
                         </div>
 
