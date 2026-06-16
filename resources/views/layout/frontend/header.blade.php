@@ -104,16 +104,6 @@
         }
     </script>
     <header class="header sticky">
-        <div class="d-flec justify-content-between">
-
-            <button class="navbar-toggler pe-5 me-5 " type="button" data-bs-toggle="collapse"
-                data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false"
-                aria-label="Toggle navigation">
-                 <i class="fas fa-bars " style="font-size: 22px;color: #fff;"></i>
-          
-            </button>
-
-        </div>
         <div>
             <a href="{{ route('home') }}" class="justify-content-end">
                 <img class="logo " src="{{ asset('frontend-asset/img/logo.png') }}" alt="Logo">
@@ -201,48 +191,6 @@
                 </li>
             </ul>
         </nav>
-        <div class="sidebar">
-            <span class="close-icon "><ion-icon class="icon" name="close"></ion-icon></span>
-            <nav class="sidebar-nav">
-                <a href="{{ route('home') }}" class="sidebar-item active">Home</a>
-                <div class="dropdown">
-                    <div class="dropbtn">Category<i class="ms-2 fas fa-caret-down"></i></div>
-                    <div class="dropdown-content" style="left: 100px;top:0px;background-color: #bdecf5 !important">
-                        @foreach ($maincategories as $maincategory)
-                            @if ($maincategory->categories->count() > 0)
-                                <!-- Check if there are associated categories -->
-                                <div class="dropdown-item">
-                                    <a class="link"
-                                        href="{{ route('category', ['category' => $maincategory->id]) }}">{{ $maincategory->name }}</a>
-                                    {{-- <div class="dropdown-submenu">
-                                        @foreach ($maincategory->categories as $category)
-                                            <a href="{{ route('category', ['category' => $category->id]) }}"
-                                                class="sub-link">{{ $category->name }}</a>
-                                        @endforeach
-                                    </div> --}}
-                                </div>
-                            @endif
-                        @endforeach
-                    </div>
-                </div>
-                <a href="{{ route('nurse') }}" class="sidebar-item">Services</a>
-                <a class="sidebar-item" href="{{ route('showOrderRequestForm') }}">Order Tracking</a>
-
-
-                @if (Route::has('login'))
-                    @auth
-                        <a class="sidebar-item" href="{{ route('dashboard.index') }}">Dashboard</a>
-                        <a class="sidebar-item" href="#" id="logout-btn">Logout</a>
-                    @else
-                        <a class="sidebar-item" href="{{ route('login') }}">Login</a>
-                        @if (Route::has('register'))
-                            <a class="sidebar-item" href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-        </div>
-        @endif
-        </nav>
-        </div>
         <button class="btn-mobile-nav">
             <ion-icon class="icon-mobile-nav" name="menu"></ion-icon>
             <ion-icon class="icon-mobile-nav" name="close"></ion-icon>
