@@ -47,8 +47,12 @@
                     </div>
                     <div class="d-flex row">
                         <div class="mb-3 col-lg-6 col-sm-12 mt-5">
-                            <label for="Inputname" class="form-label">Image</label>
+                            <label for="Inputname" class="form-label">Main Image</label>
                             <input type="file" class="form-control" id="Inputname" name="img" value="">
+                        </div>
+                        <div class="mb-3 col-lg-6 col-sm-12 mt-5">
+                            <label for="Inputimages" class="form-label">Slider Images (Multiple)</label>
+                            <input type="file" class="form-control" id="Inputimages" name="images[]" multiple>
                         </div>
                         @if ($errors->has('img'))
                             <span class="invalid-feedback" role="alert">

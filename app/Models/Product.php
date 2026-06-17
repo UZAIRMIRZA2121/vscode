@@ -20,7 +20,12 @@ class Product extends Model
         'formula',
         'category_id',
         'related_product_id',
-        'qr_code'
+        'qr_code',
+        'images'
+    ];
+
+    protected $casts = [
+        'images' => 'array',
     ];
 
     public function category()

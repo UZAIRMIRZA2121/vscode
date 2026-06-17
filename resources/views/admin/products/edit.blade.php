@@ -56,8 +56,19 @@
                 </div>
                 <div class="d-flex row">
                     <div class="mb-3 col-lg-6 col-sm-12 mt-5">
-                        <label for="Inputname" class="form-label">Image</label>
+                        <label for="Inputname" class="form-label">Main Image</label>
                         <input type="file" class="form-control" id="Inputname" name="img">
+                    </div>
+                    <div class="mb-3 col-lg-6 col-sm-12 mt-5">
+                        <label for="Inputimages" class="form-label">Slider Images (Multiple)</label>
+                        <input type="file" class="form-control" id="Inputimages" name="images[]" multiple>
+                        @if (isset($product->images) && is_array($product->images))
+                            <div class="mt-2 d-flex flex-wrap gap-2">
+                                @foreach($product->images as $img)
+                                    <img src="{{ asset($img) }}" width="60" alt="Slider image">
+                                @endforeach
+                            </div>
+                        @endif
                     </div>
                     @if ($errors->has('img'))
                     <span class="invalid-feedback" role="alert">

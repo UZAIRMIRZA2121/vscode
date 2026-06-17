@@ -55,6 +55,11 @@
                                     @csrf
                                     <button class="btn btn-success btn-sm">Restore</button>
                                 </form>
+                                <form action="{{ route('products.forceDelete', $product->id) }}" method="POST" class="ml-2" onsubmit="return confirm('Are you sure you want to permanently delete this product?');">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger btn-sm">Permanent Delete</button>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

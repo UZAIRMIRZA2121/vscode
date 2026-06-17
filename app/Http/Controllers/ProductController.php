@@ -40,6 +40,14 @@ class ProductController extends Controller
         return redirect()->route('products.trash')->with('success', 'Product restored successfully.');
     }
 
+    // Permanently Delete a product.
+    public function forceDelete($id)
+    {
+        $product = Product::onlyTrashed()->findOrFail($id);
+        $product->forceDelete();
+        return redirect()->route('products.trash')->with('success', 'Product permanently deleted.');
+    }
+
     // Store a newly created product in storage.
 
 
@@ -77,6 +85,26 @@ class ProductController extends Controller
         }
 
         // =========================
+        // Multiple Images upload
+        // =========================
+        $imagesArray = [];
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $fileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $image->getClientOriginalExtension();
+                $fileNameToStore = $fileName . '_' . time() . '_' . uniqid() . '.' . $extension;
+                
+                $uploadPath = public_path('frontend-asset/product_images');
+                if (!File::exists($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true);
+                }
+                
+                $image->move($uploadPath, $fileNameToStore);
+                $imagesArray[] = 'frontend-asset/product_images/' . $fileNameToStore;
+            }
+        }
+
+        // =========================
         // Create product
         // =========================
         $product = Product::create([
@@ -90,6 +118,7 @@ class ProductController extends Controller
             'formula' => $request->formula,
             'category_id' => $request->category_id,
             'related_product_id' => $relatedProductIds,
+            'images' => $imagesArray,
         ]);
 
         // =========================
@@ -169,6 +198,27 @@ class ProductController extends Controller
             $image->move(public_path('frontend-asset/product_images'), $imageName);
             $imagePath = 'frontend-asset/product_images/' . $imageName;
             $product->img = $imagePath;
+        }
+
+        // Update multiple images
+        if ($request->hasFile('images')) {
+            $imagesArray = [];
+            foreach ($request->file('images') as $image) {
+                $fileName = pathinfo($image->getClientOriginalName(), PATHINFO_FILENAME);
+                $extension = $image->getClientOriginalExtension();
+                $fileNameToStore = $fileName . '_' . time() . '_' . uniqid() . '.' . $extension;
+                
+                $uploadPath = public_path('frontend-asset/product_images');
+                if (!File::exists($uploadPath)) {
+                    File::makeDirectory($uploadPath, 0777, true);
+                }
+                
+                $image->move($uploadPath, $fileNameToStore);
+                $imagesArray[] = 'frontend-asset/product_images/' . $fileNameToStore;
+            }
+            
+            $existingImages = $product->images ?? [];
+            $product->images = array_merge($existingImages, $imagesArray);
         }
         // Save the updated product
         $product->save();

@@ -22,7 +22,28 @@ font-size: 22px;">
         @endif
         <div class="container">
             <section class="nurse-grid ">
-                <img src="{{ asset($product->img) }}" alt="">
+                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel" style="width: 100%; max-width: 400px;">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="{{ asset($product->img) }}" class="d-block w-100" alt="Main Image" style="height: 400px; object-fit: contain;">
+                        </div>
+                        @if(isset($product->images) && is_array($product->images))
+                            @foreach($product->images as $img)
+                            <div class="carousel-item">
+                                <img src="{{ asset($img) }}" class="d-block w-100" alt="Slider Image" style="height: 400px; object-fit: contain;">
+                            </div>
+                            @endforeach
+                        @endif
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true" style="filter: invert(100%);"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
                 <div class="nurse-flex">
                     <h3>{{ $product->name }}</h3>
                     <h2>RS {{ $product->price }}</h2>

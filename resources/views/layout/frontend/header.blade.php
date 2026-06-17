@@ -181,7 +181,7 @@
                         <li class="nested-dropdown">
                             @auth
                                 <a href="{{ route('dashboard.index') }}">Profile</a>
-                                <a href="#" id="logout-btn">Logout</a>
+                                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
                             @else
                                 <a href="{{ route('login') }}">Login<ion-icon name="caret-down"></ion-icon></a>
                                 <a href="{{ route('register') }}">Register<ion-icon name="caret-down"></ion-icon></a>
@@ -225,17 +225,7 @@
                 closeSidebar();
             }
         });
-        // Get the logout button element by its ID
-        var logoutButton = document.getElementById("logout-btn");
-
-        // Get the logout form element by its ID
-        var logoutForm = document.getElementById("logoutForm");
-
-        // Add a click event listener to the logout button
-        logoutButton.addEventListener("click", function() {
-            // Submit the form when the logout button is clicked
-            logoutForm.submit();
-        });
+        // Removed explicit event listener since we are now using inline onclick
 
         function closeShippingAlert() {
             // Get the carousel container
